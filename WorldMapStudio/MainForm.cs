@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace WorldMapStudio
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         const int _width = 128;
         const int _height = 80;
@@ -58,7 +58,7 @@ namespace WorldMapStudio
             Zooming
         }
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             _counts = new Dictionary<Color, int>
@@ -89,7 +89,7 @@ namespace WorldMapStudio
             ResetCanvas();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             Width = _width * _multiplier + 17;
             Height = _height * _multiplier + 85;
@@ -153,7 +153,7 @@ namespace WorldMapStudio
             lblCoordinate.Location = new Point(Width - 340, Height - _heightAdjuster);
         }
 
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        private void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
 
             if (!_zoomedIn)
@@ -474,7 +474,7 @@ namespace WorldMapStudio
 
         }
 
-        private void Form1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void MainForm_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (_mode == Mode.Zooming)
             {
@@ -510,7 +510,7 @@ namespace WorldMapStudio
             }
         }
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             switch (e.KeyChar)
             {
