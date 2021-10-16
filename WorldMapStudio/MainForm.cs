@@ -11,8 +11,8 @@ namespace WorldMapStudio
     {
         const int _width = 128;
         const int _height = 80;
-        const int _multiplier = 12;
-        const int _zoomedInMultiplier = 60;
+        const int _multiplier = 11;
+        const int _zoomedInMultiplier = 55;
         const int _heightAdjuster = 70;
 
         const int _darkBlueCount = 1879;
@@ -27,7 +27,7 @@ namespace WorldMapStudio
 
         static Color _land = Color.FromArgb(254, 254, 254);
         static Color _erase = Color.FromArgb(1, 1, 1);
-        static Color _grid = Color.FromArgb(40, 40, 40);
+        static Color _grid = Color.FromArgb(254, 0, 0);
 
         static Color _darkBlue = Color.FromArgb(0, 157, 150);
         static Color _blue = Color.FromArgb(83, 226, 255);
@@ -61,18 +61,13 @@ namespace WorldMapStudio
         public MainForm()
         {
             InitializeComponent();
-            _counts = new Dictionary<Color, int>
-            {
-                {_darkBlue, _darkBlueCount },
-                {_blue, _blueCount },
-                {_darkGreen, _darkGreenCount },
-                {_green, _greenCount },
-                {_pink, _pinkCount },
-                {_orange, _orangeCount },
-                {_yellow, _yellowCount },
-                {_sand, _sandCount},
-                {_shadow, _shadowCount}
-            };
+            ResetCounts();
+            ResetLables();
+            ResetCanvas();
+        }
+
+        private void ResetLables()
+        {
             _lables = new Dictionary<Color, Label>
             {
                 {_darkBlue, lblDarkBlue },
@@ -85,8 +80,22 @@ namespace WorldMapStudio
                 { _sand, lblSand},
                 { _shadow, lblShadow}
             };
+        }
 
-            ResetCanvas();
+        private static void ResetCounts()
+        {
+            _counts = new Dictionary<Color, int>
+            {
+                {_darkBlue, _darkBlueCount },
+                {_blue, _blueCount },
+                {_darkGreen, _darkGreenCount },
+                {_green, _greenCount },
+                {_pink, _pinkCount },
+                {_orange, _orangeCount },
+                {_yellow, _yellowCount },
+                {_sand, _sandCount},
+                {_shadow, _shadowCount}
+            };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -342,6 +351,25 @@ namespace WorldMapStudio
                     DrawCell(x, y, _canvas[x, y], graphics);
         }
 
+        private void OpenCanvas(Graphics graphics)
+        {
+            ResetCounts();
+            ResetLables();
+
+            for (int x = 0; x < _canvas.GetLength(0); x++)
+                for (int y = 0; y < _canvas.GetLength(1); y++)
+                {
+                    var color = _canvas[x, y];
+                    DrawCell(x, y, color, graphics);
+                    if (_counts.ContainsKey(color))
+                    {
+                        _counts[color]--;
+                        _lables[color].Text = _counts[color].ToString();
+                    }
+                }
+
+        }
+
         private void DrawZoomedInSection(Graphics graphics)
         {
             for (int x = 0; x < 16; x++)
@@ -505,7 +533,7 @@ namespace WorldMapStudio
                     _canvas = JsonConvert.DeserializeObject<Color[,]>(sr.ReadToEnd());
 
                     using (var graphics = CreateGraphics())
-                        DrawCanvas(graphics);
+                        OpenCanvas(graphics);
                 }
             }
         }

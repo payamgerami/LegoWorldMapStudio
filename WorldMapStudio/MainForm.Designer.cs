@@ -400,7 +400,7 @@ namespace WorldMapStudio
             this.lblSand.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblSand.Font = new System.Drawing.Font("Courier New", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSand.ForeColor = System.Drawing.Color.White;
-            this.lblSand.Location = new System.Drawing.Point(1639, 9);
+            this.lblSand.Location = new System.Drawing.Point(1642, 9);
             this.lblSand.Name = "lblSand";
             this.lblSand.Size = new System.Drawing.Size(78, 31);
             this.lblSand.TabIndex = 23;
@@ -421,7 +421,7 @@ namespace WorldMapStudio
             this.lblShadow.Text = "1234";
             this.lblShadow.Visible = false;
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -454,7 +454,7 @@ namespace WorldMapStudio
             this.Controls.Add(this.lblBlue);
             this.Controls.Add(this.lblDarkBlue);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "frmWorldMap";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
